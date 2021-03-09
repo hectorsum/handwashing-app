@@ -1,6 +1,6 @@
 <script>
   import ProgressBar from './ProgressBar.svelte'
-  const totalSeconds = 20;
+  const totalSeconds = 5;
   let secondLeft = totalSeconds;
   let isRunning = false;
   $: progress = ((totalSeconds-secondLeft) / totalSeconds) * 100;
@@ -11,6 +11,7 @@
       if(secondLeft===0){
         clearInterval(timer)
         isRunning=false;
+        secondLeft = totalSeconds;
       }
     },1000);
   }
@@ -35,7 +36,7 @@
     Seconds left: {secondLeft}
   </h2>
 </div>
-<ProgressBar progress={progress}/>
+<ProgressBar {progress}/>
 <button disabled={isRunning} on:click={startTimer} class="start">
   Start
 </button>
